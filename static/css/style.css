@@ -1,0 +1,30 @@
+body {
+	margin: ;
+}
+
+h1, h2 {
+	font-family: 'Sansita One';
+}
+.well {
+	padding: 0px;
+}
+.postImg {
+	width: 500px;
+}
+
+.post {
+}
+.navbar-brand img {
+	height: 30px;
+	padding: 0px;
+}
+
+.navbar-header {
+	height: 60px;
+}
+
+.navbar-nav {
+	font-size: 20px;
+	font-family: 'Sansita One';
+	vertical-align: middle;
+}

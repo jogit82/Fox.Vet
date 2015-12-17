@@ -1,0 +1,18 @@
+<a href="<%= lastPage %>">Back</a> 
+<h2>New Post</h2>
+
+<form action="/posts/" method="POST" role="form" enctype="multipart/form-data">
+  <div class="form-group">
+  	<input type="file" name="myFile"><br>
+    <label for="">Caption</label>
+    <input type="text" class="form-control" id="" placeholder="Caption" name="caption"><br>
+
+    <label for="">Description</label>
+    <input type="text" class="form-control" id="" placeholder="Description" name="description"><br>
+
+    <label for="">Tag</label>
+    <input type="text" class="form-control" id="" placeholder="Tags" name="tagName">
+
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
