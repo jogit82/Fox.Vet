@@ -1,15 +1,17 @@
 <form action="/movies" method="GET" role="form">
-  <legend>Search for Movies</legend>
+  <legend></legend>
 
 <% if (currentUser) { %>
   <div class="form-group">
     <label for="">Search</label>
-    <input type="text" class="form-control" id="" placeholder="ex. Back to the Future" name="q">
+    <input type="text" class="form-control" id="" placeholder="" name="q">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <% } else { %>
-<h1>Please login to see awesome movies!</h1>
+<h2>Please login</h2><br>
+<div>
 <a href="/auth/login" class="btn btn-primary">Login</a>
 <a href="/auth/signup" class="btn btn-success">Signup</a>
+</div>
 <% } %>

@@ -6,25 +6,43 @@ var upload     = multer({ dest: './uploads/' });
 var router     = express.Router();
 
 router.get('/', function(req, res) {
-  res.render('posts/');
+  if(req.session.user) {
+    res.render('posts/');
+  } else {
+    res.redirect('/');
+  }
 });
+
+// router.get('/', function(req, res) {
+//   db.tag.findAll({
+//     include: [db.post]
+//   }).then(function(tags) {
+//     res.render('posts/allposts', {tags: tags});
+//   });
+// });
 
 router.get('/all', function(req, res) {
-  db.post.findAll({
-    order: 'id DESC'
-  }).then(function(posts) {
-    res.render('posts/allposts', {posts: posts});
-  });
+  if(req.session.user) {
+    db.post.findAll({
+      order: 'id DESC'
+    }).then(function(posts) {
+      res.render('posts/allposts', {posts: posts});
+    });
+  } else {
+    res.redirect('/');
+  }
 });
 
-router.get('/:id/tags', function(req, res) {
-  var favoriteId = req.params.id;
-  db.favorite.findById(favoriteId).then(function(favorite) {
-    favorite.getTags().then(function(tags) {
-      res.render('favorites/tags', {tags: tags, favorite: favorite});
-    });
-  });
-});
+// router.get('/all', function(req, res) {
+//   db.post.findAll({
+//     order: 'id DESC'
+//   }).then(function(posts) {
+//     post.getTags().then(function(tags) {
+//       console.log(tags);
+//       res.render('posts/allposts', {tags: tags, posts: posts});
+//     });
+//   });
+// });
 
 router.post('/', upload.single('myFile'), function(req, res){
   cloudinary.uploader.upload(req.file.path, function(result) {

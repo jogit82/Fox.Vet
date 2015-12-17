@@ -2,6 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   var activity = sequelize.define('activity', {
     content: DataTypes.TEXT,
+    postId: DataTypes.INTEGER,
     fromUser: DataTypes.STRING,
     toUser: DataTypes.STRING,
     type: DataTypes.STRING

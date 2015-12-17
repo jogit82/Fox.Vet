@@ -1,12 +1,35 @@
+var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var db = require('../models');
 
 
 module.exports = {
+    localStrategy : new LocalStrategy({
+        usernameField: 'email'
+      },
+      function(username, password, done){
+        db.user.find({
+          where : {email: username}
+        }).then(function(user){
+          if(user){
+            user.checkPassword(password, function(err, result){
+              if (err) return done(err);
+              if(result){
+                done(null, user.get());
+              } else {
+                done(null, false, {message: 'Invalid password'});
+              }
+            });
+          } else {
+            done(null, false, {message: 'No user found'});
+          }
+        });
+      }
+    ),
     facebookStrategy: new FacebookStrategy({
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: process.env.BASE_URL + '/auth/callback/facebook',
+      callbackURL: process.env.BASE_URL + '/auth/callback/facebook/',
       profileFields: ['email', 'displayName']
     },
     function(accessToken, refreshToken, profile, done) {
@@ -25,10 +48,12 @@ module.exports = {
         } else {
           var email = profile.emails[0].value;
           db.user.findOrCreate({
-            where: {email: email},
-            defaults: {name: profile.displayName}
+            where: {email: email}
           }).spread(function(user, created) {
             if (created) {
+              user.updateAttributes({
+                name: profile.displayName
+              });
               user.createProvider({
                 pid: profile.id,
                 token: accessToken,
