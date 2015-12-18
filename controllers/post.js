@@ -33,6 +33,22 @@ router.get('/all', function(req, res) {
   }
 });
 
+router.get('/myPosts', function(req, res) {
+  if(req.user) {
+    db.post.findAll({
+      where: {
+        userId: req.session.passport.user
+      },
+      order: [['createdAt', 'DESC']]
+    }).then(function(posts){
+      res.render('posts/myposts', {posts: posts});
+   });
+  } else {
+    res.redirect('/');
+  }
+});
+
+
 // router.get('/all', function(req, res) {
 //   db.post.findAll({
 //     order: 'id DESC'
@@ -49,7 +65,8 @@ router.post('/', upload.single('myFile'), function(req, res){
     var newPost = {
       caption:req.body.caption,
       description:req.body.description,
-      image : result.url
+      image : result.url,
+      userId: req.session.passport.user
     }
     db.post.create(newPost).then(function(posted){
       var comma = ',';
@@ -58,7 +75,7 @@ router.post('/', upload.single('myFile'), function(req, res){
       for (var i = 0; i < separatedTags.length; i++) {
         db.tag.findOrCreate({where: {tag: separatedTags[i]}}).spread(function(tag, created){
           posted.addTag(tag).then(function(){
-            res.redirect('/posts');
+            res.redirect('/posts/all');
           });
         });
       }

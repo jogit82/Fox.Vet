@@ -55,7 +55,7 @@ router.route('/login')
       req.login(user, function(err){
         if(err) throw err;
         req.flash('success', 'You are now logged in.');
-        // res.send(user.id);
+        // res.send(user.email);
         res.redirect('/'); // Where to send users after successful login
       });
     } else {

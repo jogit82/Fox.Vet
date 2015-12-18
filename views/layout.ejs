@@ -28,6 +28,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/posts">New Post <span class="sr-only">(current)</span></a></li>
+        <li><a href="/posts/all">All Posts</a></li>
         <li><a href="/activities">Activities</a></li>
       </ul>
     <form action="/posts/" method="GET" role="form" class="navbar-form navbar-left">
@@ -39,6 +40,7 @@
  -->	   </form>
      <ul class="nav navbar-nav navbar-right">
      <% if(currentUser) { %>
+      <li><a href="/posts/myposts"><%= currentUser.name %></a></li>
       <li><a href="/auth/logout" class="btn btn-danger">Logout</a></li>
      <% } %>
      </ul>
