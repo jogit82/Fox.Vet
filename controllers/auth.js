@@ -23,9 +23,13 @@ router.route('/signup')
       }
     }).spread(function(user, created) {
       if (created) {
-        res.redirect('/');
+        req.login(user, function(err){
+          if(err) throw err;
+          req.flash('success', 'You are signed up and logged in.')
+          res.redirect('/');
+        });
       } else {
-        req.flash('danger', 'Email already!');
+        req.flash('danger', 'That email is aready signed up!');
         res.redirect('/auth/signup');
       }
     }).catch(function(err) {
@@ -34,6 +38,7 @@ router.route('/signup')
       } else {
         console.log(err);
       }
+      req.flash('danger', 'Error');
       res.redirect('/auth/signup');
     });
   }
@@ -46,9 +51,11 @@ router.route('/login')
   .post(function(req, res){
   passport.authenticate('local', function(err, user, info){
     if(user){
+      
       req.login(user, function(err){
         if(err) throw err;
         req.flash('success', 'You are now logged in.');
+        // res.send(user.id);
         res.redirect('/'); // Where to send users after successful login
       });
     } else {

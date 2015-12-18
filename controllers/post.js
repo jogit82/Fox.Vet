@@ -6,7 +6,7 @@ var upload     = multer({ dest: './uploads/' });
 var router     = express.Router();
 
 router.get('/', function(req, res) {
-  if(req.session.user) {
+  if(req.user) {
     res.render('posts/');
   } else {
     res.redirect('/');
@@ -22,7 +22,7 @@ router.get('/', function(req, res) {
 // });
 
 router.get('/all', function(req, res) {
-  if(req.session.user) {
+  if(req.user) {
     db.post.findAll({
       order: 'id DESC'
     }).then(function(posts) {
@@ -65,6 +65,55 @@ router.post('/', upload.single('myFile'), function(req, res){
     });
   });
 });
+
+router.get('/search', function(req, res){
+  var foundPosts = [];
+  
+  db.tag.find(
+    {where: {tag: "dog"}}
+  ).then(function(tag) {
+    tag.getPosts().then(function(posts){
+      posts.forEach(function(post){
+        foundPosts.push(post);
+      });
+      res.send(foundPosts);
+    });
+  });
+});
+
+router.get('/:term', function(req, res){
+  var searchTerm = req.params.term;
+  var foundPosts = [];
+  
+  db.tag.find(
+    {where: {tag: searchTerm}}
+  ).then(function(tag) {
+    tag.getPosts().then(function(posts){
+      posts.forEach(function(post){
+        foundPosts.push(post);
+      });
+      res.send(foundPosts);
+    });
+  });
+});
+
+
+// router.get('/', function(req, res){
+//   var foundPosts = [];
+  
+//   db.tag.find(
+//     {where: {tag: "dog"}}
+//   ).then(function(tag) {
+//     tag.getPosts().then(function(posts){
+//       posts.forEach(function(post){
+//         foundPosts.push(post);
+//       });
+//       res.send(foundPosts);
+//     });
+//   });
+// });
+
+// module.exports = router;
 
 // router.post('/:id/comments', function(req, res) {
 //   var id = req.params.id;

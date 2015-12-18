@@ -30,15 +30,16 @@
         <li class="active"><a href="/posts">New Post <span class="sr-only">(current)</span></a></li>
         <li><a href="/activities">Activities</a></li>
       </ul>
-    <form action="/movies" method="GET" role="form" class="navbar-form navbar-left">
+    <form action="/posts/" method="GET" role="form" class="navbar-form navbar-left">
   		<div class="form-group">
-    	<input type="text" class="form-control" id="" placeholder="ex. Search tag" name="q">
+    	<input type="text" class="form-control" id="" placeholder="Enter a tag" name="term">
   		</div>
-  		<button type="submit" class="btn btn-primary">Submit</button>
-	   </form>
+  		<button type="submit" class="btn btn-primary">Search</button>
+<!--       <a href="/posts/" class="btn btn-primary">Search Tag</a>
+ -->	   </form>
      <ul class="nav navbar-nav navbar-right">
      <% if(currentUser) { %>
-      <li><a href="/auth/logout" class="btn btn-primary">Logout</a></li>
+      <li><a href="/auth/logout" class="btn btn-danger">Logout</a></li>
      <% } %>
      </ul>
     </div><!-- /.navbar-collapse -->

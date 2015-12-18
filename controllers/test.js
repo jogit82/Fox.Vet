@@ -4,7 +4,7 @@ var router  = express.Router();
 
 router.get('/', function(req, res){
 	var foundPosts = [];
-
+	
 	db.tag.find(
 		{where: {tag: "dog"}}
 	).then(function(tag) {
@@ -15,7 +15,6 @@ router.get('/', function(req, res){
 			res.send(foundPosts);
 		});
 	});
-	
 });
 
 module.exports = router;
