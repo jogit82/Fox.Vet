@@ -5,12 +5,12 @@ module.exports = function(sequelize, DataTypes) {
     postId: DataTypes.INTEGER,
     fromUser: DataTypes.STRING,
     toUser: DataTypes.STRING,
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        models.activity.belongsTo(models.user);
+        // models.activity.belongsTo(models.user);
         models.activity.belongsTo(models.post);
       }
     }

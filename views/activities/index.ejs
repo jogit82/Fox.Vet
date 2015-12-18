@@ -1,4 +1,10 @@
 <a href="<%= lastPage %>">Back</a> 
-<h2>Activities</h2>
-Like notifications, consists of:
-Likes, Comments and Follows
+<h2>Your Activities</h2>
+<% activities.forEach(function(activity){ %>
+
+<div class="well">
+	<p><%= activity.fromUser %> <%= activity.type %>ed on your post</p><a href="/posts/<%= activity.postId %>/comments" class="btn btn-info">Go to comments</a>
+</div>
+
+
+<% }); %>

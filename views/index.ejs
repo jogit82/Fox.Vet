@@ -15,3 +15,16 @@
 <a href="/auth/signup" class="btn btn-success">Signup</a>
 </div>
 <% } %>
+
+<a href="#my_modal" data-toggle="modal" data-book-id="my_id_value">Open Modal</a>
+<script>
+	//triggered when modal is about to be shown
+$('#my_modal').on('show.bs.modal', function(e) {
+
+    //get data-id attribute of the clicked element
+    var bookId = $(e.relatedTarget).data('book-id');
+
+    //populate the textbox
+    $(e.currentTarget).find('input[name="bookId"]').val(bookId);
+});
+</script>

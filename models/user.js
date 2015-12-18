@@ -22,6 +22,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         models.user.hasMany(models.provider);
         models.user.hasMany(models.post);
+        // models.user.hasMany(models.activity);
         // associations can be defined here
       }
     },

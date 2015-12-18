@@ -4,9 +4,10 @@
 
 <% posts.forEach(function(post) { %>
 <div class="well">
-	<a href="<%= '/posts/:' + post.id %>">
+	<a href="/posts/<%= post.id %>/comments" class="btn btn-info">Comments</a>
 		<div class="post"><img class="postImg" src="<%= post.image %>"></div>
 		<div><%= post.caption %></div>
 		<div><%= post.description %></div>
 	</div></a>
 <% }); %>
+

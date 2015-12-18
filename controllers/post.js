@@ -24,7 +24,7 @@ router.get('/', function(req, res) {
 router.get('/all', function(req, res) {
   if(req.user) {
     db.post.findAll({
-      order: 'id DESC'
+      order: [['createdAt', 'DESC']]
     }).then(function(posts) {
       res.render('posts/allposts', {posts: posts});
     });
@@ -33,21 +33,26 @@ router.get('/all', function(req, res) {
   }
 });
 
-router.get('/myPosts', function(req, res) {
-  if(req.user) {
-    db.post.findAll({
-      where: {
-        userId: req.session.passport.user
-      },
-      order: [['createdAt', 'DESC']]
-    }).then(function(posts){
-      res.render('posts/myposts', {posts: posts});
-   });
-  } else {
-    res.redirect('/');
-  }
-});
 
+// router.post('/:postId/comments', function(req, res) {
+//   console.log('moo');
+//   console.log(req.params.postId);
+
+  // var id = req.params.id;
+  // var newComment= {
+  //   content: req.body.comment,
+  //   fromUser: req.session.passport.user,
+  //   toUser: req.params.userId
+  // }
+  // db.post.findById(id).then(function(post) {
+  //   activity.createComment({
+  //     content: req.body.text,
+
+  //   }).then(function(comment) {
+  //     res.redirect('/favorites/' + id + '/comments');
+  //   });
+  // });
+// });
 
 // router.get('/all', function(req, res) {
 //   db.post.findAll({
@@ -83,36 +88,104 @@ router.post('/', upload.single('myFile'), function(req, res){
   });
 });
 
-router.get('/search', function(req, res){
-  var foundPosts = [];
-  
-  db.tag.find(
-    {where: {tag: "dog"}}
-  ).then(function(tag) {
-    tag.getPosts().then(function(posts){
-      posts.forEach(function(post){
-        foundPosts.push(post);
-      });
-      res.send(foundPosts);
+router.get('/:id/comments', function(req, res) {
+  var id = req.params.id;
+//   db.activity.create({ content: 'second comment', fromUser: 4, toUser: 5, type: 'comment', postId: 37 }).then(function(activity) {
+
+  db.activity.findAll({where: {type: 'comment', postId: id}})
+  .then(function(activities){
+    // console.log("moo");
+    res.render('posts/comments', {activities: activities});
+  });
+});
+
+//   db.post.findById(id).then(function(post) {
+//     post.getActivities().then(function(activities) {
+//       res.render('posts/comments', {activities: activities, post: post});
+//     });
+//   });
+// });
+
+// router.post('/:id/comments', function(req, res) {
+//   var id = req.params.id;
+//   db.post.findById(id).then(function(post) {
+//     post.createActivity({
+//       content: req.body.comment,
+//       fromUser: req.session.passport.user
+//       postId: id
+      
+//     }).then(function(comment) {
+//       res.redirect('/favorites/' + id + '/comments');
+//     });
+//   });
+// });
+
+router.post('/:id/comments', function(req, res) {
+  var id = req.params.id;
+  db.post.findById(id).then(function(post){
+    // console.log("moo");
+    // console.log(post);
+    post.createActivity({
+      content: req.body.comment,
+      type: 'comment',
+      fromUser: req.session.passport.user,
+      toUser: post.userId
+    }).then(function(activity){
+      res.redirect('/posts/' + id + '/comments');
     });
   });
 });
 
-router.get('/:term', function(req, res){
-  var searchTerm = req.params.term;
-  var foundPosts = [];
+
+// router.post('/:id/comments', function(req, res) {
+//   var id = req.params.id;
+//   db.user.find({
+//     where: {id: req.session.passport.user}
+//   }).then(function(user){
+//     db.post.findById(id).then(function(post) {
+//       post.createComment({
+//         content: req.body.comment,
+//         fromUser: user.id,
+//         toUser: 2,
+//         type: 'comment',
+//         postId: 3
+//       }).then(function(comment) {
+//         res.redirect('/posts/' + id + '/comments');
+//       });
+//     });
+//   });
+// });
+
+// router.get('/search', function(req, res){
+//   var foundPosts = [];
   
-  db.tag.find(
-    {where: {tag: searchTerm}}
-  ).then(function(tag) {
-    tag.getPosts().then(function(posts){
-      posts.forEach(function(post){
-        foundPosts.push(post);
-      });
-      res.send(foundPosts);
-    });
-  });
-});
+//   db.tag.find(
+//     {where: {tag: "dog"}}
+//   ).then(function(tag) {
+//     tag.getPosts().then(function(posts){
+//       posts.forEach(function(post){
+//         foundPosts.push(post);
+//       });
+//       res.send(foundPosts);
+//     });
+//   });
+// });
+
+// router.get('/:term', function(req, res){
+//   var searchTerm = req.params.term;
+//   var foundPosts = [];
+  
+//   db.tag.find(
+//     {where: {tag: searchTerm}}
+//   ).then(function(tag) {
+//     tag.getPosts().then(function(posts){
+//       posts.forEach(function(post){
+//         foundPosts.push(post);
+//       });
+//       res.send(foundPosts);
+//     });
+//   });
+// });
 
 
 // router.get('/', function(req, res){

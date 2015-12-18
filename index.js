@@ -70,13 +70,10 @@ app.get('/', function(req, res) {
 });
 
 app.use('/posts', require('./controllers/post'));
-app.use('/friends', require('./controllers/friend'));
 app.use('/profile', require('./controllers/profile'));
 app.use('/activities', require('./controllers/activity'));
-app.use('/movies', require('./controllers/movie'));
-app.use('/favorites', require('./controllers/favorite'));
 app.use('/auth', require('./controllers/auth'));
-app.use('/test', require('./controllers/test'));
+app.use('/tag', require('./controllers/tag'));
 
 
 var port = 3000;

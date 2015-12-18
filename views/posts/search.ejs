@@ -1,2 +1,13 @@
-<h1>Results</h1>
-<% tags.forEach() %>
+<a href="<%= lastPage %>">Back</a> 
+<h2>Search Results</h2>
+<% posts.forEach(function(post){ %>
+
+<div class="well">
+	<a href="/posts/<%= post.id %>/comments" class="btn btn-info">Comments</a>
+		<div class="post"><img class="postImg" src="<%= post.image %>"></div>
+		<div><%= post.caption %></div>
+		<div><%= post.description %></div>
+	</div></a>
+
+
+<% }); %>

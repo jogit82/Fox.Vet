@@ -1,2 +1,14 @@
 <a href="<%= lastPage %>">Back</a> 
-<h2>My Profile</h2>
+<h2>Posts that I made</h2>
+
+
+<% posts.forEach(function(post) { %>
+
+<div class="well">
+	<a href="<%= '/posts/:' + post.id %>">
+		<div class="post"><img class="postImg" src="<%= post.image %>"></div>
+		<div><%= post.caption %></div>
+		<div><%= post.description %></div>
+	</div></a>
+	
+<% }); %>

@@ -1,22 +1,15 @@
-<h1>Comments for <%= post.caption %></h1>
-
-<% comments.forEach(function(comment) { %>
+<% activities.forEach(function(comment) { %>
   <div class="well">
-    <p><%= comment.text %></p>
-    <p><strong><%= comment.author %></strong></p>
+    <p><%= comment.content %></p>
+    <p><strong><%= comment.fromUser %></strong></p>
   </div>
 <% }); %>
 
 <form action="" method="POST" role="form">
   <legend>Create a new Comment</legend>
-
   <div class="form-group">
-    <label for="">Author</label>
-    <input type="text" class="form-control" id="" name="author">
-  </div>
-  <div class="form-group">
-    <label for="">Text</label>
-    <input type="text" class="form-control" id="" name="text">
+    <label for="">Comment</label>
+    <input type="text" class="form-control" id="" name="comment">
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>

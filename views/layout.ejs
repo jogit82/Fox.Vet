@@ -31,7 +31,7 @@
         <li><a href="/posts/all">All Posts</a></li>
         <li><a href="/activities">Activities</a></li>
       </ul>
-    <form action="/posts/" method="GET" role="form" class="navbar-form navbar-left">
+    <form action="/tag" method="post" role="form" class="navbar-form navbar-left">
   		<div class="form-group">
     	<input type="text" class="form-control" id="" placeholder="Enter a tag" name="term">
   		</div>
@@ -40,8 +40,8 @@
  -->	   </form>
      <ul class="nav navbar-nav navbar-right">
      <% if(currentUser) { %>
-      <li><a href="/posts/myposts"><%= currentUser.name %></a></li>
-      <li><a href="/auth/logout" class="btn btn-danger">Logout</a></li>
+      <a href="/profile"><%= currentUser.name %></a>
+      <a href="/auth/logout" class="btn btn-danger btn-sm">Logout</a>
      <% } %>
      </ul>
     </div><!-- /.navbar-collapse -->
