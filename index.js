@@ -66,7 +66,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-  res.render('index');
+  res.render('auth/login');
 });
 
 app.use('/posts', require('./controllers/post'));

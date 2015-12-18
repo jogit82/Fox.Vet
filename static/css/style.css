@@ -1,19 +1,34 @@
 body {
-	margin: ;
+	margin: auto 0;
 }
 
 h1, h2, h3 {
 	font-family: 'Sansita One';
 }
-.well {
-	padding: 0px;
+
+.login-fb {
+	position: inline-block;
+	text-align: center;
 }
+
+.fb_img {
+ 	position: relative;
+}
+
+.well {
+	padding: 20px;
+	width: 550px;
+	font-size: 15px;
+	font-family: 'Fjalla One';
+}
+
 .postImg {
 	width: 500px;
 }
 
 .post {
 }
+
 .navbar-brand img {
 	height: 30px;
 	padding: 0px;
@@ -24,7 +39,7 @@ h1, h2, h3 {
 }
 
 .navbar-nav {
-	font-size: 20px;
+	font-size: 25px;
 	font-family: 'Sansita One';
 	vertical-align: middle;
 }

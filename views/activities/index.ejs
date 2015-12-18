@@ -1,10 +1,8 @@
 <a href="<%= lastPage %>">Back</a> 
-<h2>Your Activities</h2>
+<h2>Notification</h2>
+
 <% activities.forEach(function(activity){ %>
-
 <div class="well">
-	<p><%= activity.fromUser %> <%= activity.type %>ed on your post</p><a href="/posts/<%= activity.postId %>/comments" class="btn btn-info">Go to comments</a>
+	<a href="/posts/<%= activity.postId %>/comments"><p><%= activity.fromUser %> <%= activity.type %>ed on your post</p></a>
 </div>
-
-
 <% }); %>

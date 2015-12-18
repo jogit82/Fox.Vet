@@ -8,6 +8,7 @@
   	<link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   	<link rel="stylesheet" media="screen" href="/css/style.css">
   	<link href='https://fonts.googleapis.com/css?family=Sansita+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
   <title>Fox.Vet</title>
 </head>
 <body>
@@ -27,9 +28,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/posts">New Post <span class="sr-only">(current)</span></a></li>
+        <li class="pill"><a href="/posts">Post<span class="sr-only">(current)</span></a></li>
         <li><a href="/posts/all">All Posts</a></li>
-        <li><a href="/activities">Activities</a></li>
+        <li><a href="/activities">Notification</a></li>
       </ul>
     <form action="/tag" method="post" role="form" class="navbar-form navbar-left">
   		<div class="form-group">
@@ -48,8 +49,12 @@
   </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
-  <% include partials/alerts %>
-  <%- body %>
+  <div class="row">
+  <div class="col-md-6">
+    <% include partials/alerts %>
+    <%- body %>
+  </div>
+  </div>
 </div>
 <script type="text/javascript" src="/js/script.js"></script>
  <script src="//code.jquery.com/jquery.js"></script>
