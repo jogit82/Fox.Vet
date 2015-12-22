@@ -5,7 +5,9 @@ body {
 h1, h2, h3 {
 	font-family: 'Sansita One';
 }
-
+#this2,#this3 {
+	display: none;
+}
 .login-fb {
 	position: inline-block;
 	text-align: center;
@@ -15,11 +17,16 @@ h1, h2, h3 {
  	position: relative;
 }
 
+
 .well {
 	padding: 20px;
 	width: 550px;
 	font-size: 15px;
 	font-family: 'Fjalla One';
+}
+
+#auth {
+	width: 700px;
 }
 
 .postImg {
@@ -39,7 +46,7 @@ h1, h2, h3 {
 }
 
 .navbar-nav {
-	font-size: 25px;
+	font-size: 22px;
 	font-family: 'Sansita One';
 	vertical-align: middle;
 }

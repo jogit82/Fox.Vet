@@ -1,10 +1,18 @@
-<% activities.forEach(function(comment) { %>
-  <div class="well">
-    <p><%= comment.content %></p>
-    <p><strong><%= comment.fromUser %></strong></p>
-  </div>
-<% }); %>
+<a href="<%= lastPage %>">Back</a> 
+  <% activities[0].forEach(function(comment) { %>
+  
+    
+    <div class="well">
+      <p><%= comment.content %></p>
+    
+    </div>
+<% activities.forEach(function(user, idx){ %>
+ <% if(user.id === parseInt(comment.fromUser)){ %>
+      <div id="this<%= idx %>"><%= user.name %></div>
+  <% } %>
+  <% }) %>
 
+<%   }) %>
 <form action="" method="POST" role="form">
   <legend>Create a new Comment</legend>
   <div class="form-group">

@@ -26,7 +26,7 @@ router.route('/signup')
         req.login(user, function(err){
           if(err) throw err;
           req.flash('success', 'You are signed up and logged in.')
-          res.redirect('/');
+          res.redirect('/auth/login');
         });
       } else {
         req.flash('danger', 'That email is aready signed up!');

@@ -4,6 +4,7 @@
 
 <% posts.forEach(function(post) { %>
 <div class="well">
+	<div><h3><%= post.user.name %></h3></div>
 	<div class="post"><img class="postImg" src="<%= post.image %>"></div>
 	<div><%= post.caption %></div>
 	<div><%= post.description %></div>

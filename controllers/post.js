@@ -16,8 +16,9 @@ router.get('/', function(req, res) {
 router.get('/all', function(req, res) {
   if(req.user) {
     db.post.findAll({
-      order: [['createdAt', 'DESC']]
+      order: [['createdAt', 'DESC']], include:[db.user]
     }).then(function(posts) {
+      // res.send(posts)
       res.render('posts/allposts', {posts: posts});
     });
   } else {
@@ -47,14 +48,46 @@ router.post('/', upload.single('myFile'), function(req, res){
     });
   });
 });
+router.get('/:id/api', function(req, res) {
+  var id = req.params.id;
+  // db.activity.create({ content: 'second comment', fromUser: 4, toUser: 5, type: 'likes', postId: 37 }).then(function(activity) {
+  db.activity.findAll({where: {type: 'comment', postId: id}})
+  .then(function(activities){
+    db.user.findAll().then(function(users){
+      console.log(activities)
 
+      var acts = [activities];
+      users.forEach(function(user){
+        activities.forEach(function(act){
+          if(parseInt(act.fromUser) == user.id){
+            acts.push(user);
+          } 
+        })
+      })
+    res.send({activities: acts});
+
+    })
+  });
+});
 router.get('/:id/comments', function(req, res) {
   var id = req.params.id;
   // db.activity.create({ content: 'second comment', fromUser: 4, toUser: 5, type: 'likes', postId: 37 }).then(function(activity) {
-
   db.activity.findAll({where: {type: 'comment', postId: id}})
   .then(function(activities){
-    res.render('posts/comments', {activities: activities});
+    db.user.findAll().then(function(users){
+      console.log(activities)
+
+      var acts = [activities];
+      users.forEach(function(user){
+        activities.forEach(function(act){
+          if(parseInt(act.fromUser) == user.id){
+            acts.push(user);
+          } 
+        })
+      })
+    res.render('posts/comments', {activities: acts});
+
+    })
   });
 });
 

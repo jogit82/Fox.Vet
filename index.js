@@ -77,6 +77,6 @@ app.use('/tag', require('./controllers/tag'));
 
 
 var port = 3000;
-app.listen(port, function() {
+app.listen(process.env.PORT || port, function() {
   console.log("You're listening to the smooth sounds of port " + port);
 });
