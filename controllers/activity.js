@@ -10,7 +10,6 @@ router.get('/', function(req, res) {
     	},
       order: [['createdAt', 'DESC']]
     }).then(function(activities) {
-    	console.log("moo");
       res.render('activities', {activities: activities});
     });
   } else {
